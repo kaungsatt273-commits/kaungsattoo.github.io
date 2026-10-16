@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0912">
+  <meta name="description" content="Portfolio of Kaung Satt Oo — Telecom Project Engineer and Esports Team Manager.">
+  <title>Kaung Satt Oo | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b0912;
+      --surface: #14111f;
+      --surface-2: #1b1729;
+      --text: #f7f4ff;
+      --muted: #b8b0ca;
+      --line: rgba(201, 179, 255, .16);
+      --purple: #a78bfa;
+      --purple-strong: #8b5cf6;
+      --purple-light: #d8c8ff;
+      --max: 1120px;
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 78% 4%, rgba(124, 58, 237, .17), transparent 35%),
+        radial-gradient(ellipse at 0% 38%, rgba(91, 33, 182, .10), transparent 34%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(11, 9, 18, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 850; letter-spacing: -.04em; font-size: 1.05rem; white-space: nowrap; }
+    .brand span { color: var(--purple); }
+    .nav-links { display: flex; gap: 24px; align-items: center; color: var(--muted); font-size: .91rem; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+    .menu-toggle { display: none; background: var(--surface-2); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+    .hero { padding: 94px 0 74px; }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; align-items: center; gap: 52px; }
+    .eyebrow { display: inline-flex; gap: 9px; align-items: center; color: var(--purple-light); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--purple-strong); }
+    h1 { font-size: clamp(2.65rem, 7vw, 5.4rem); letter-spacing: -.065em; line-height: 1.02; margin: 20px 0 18px; }
+    h1 span { color: var(--purple); }
+    .hero p { max-width: 660px; color: var(--muted); font-size: 1.07rem; margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 11px 18px; border-radius: 12px; font-weight: 750; border: 1px solid transparent; transition: transform .2s, border-color .2s, background .2s; cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #fff; background: linear-gradient(135deg, #8b5cf6, #6d28d9); box-shadow: 0 10px 30px rgba(124, 58, 237, .22); }
+    .btn-secondary { border-color: var(--line); background: rgba(255,255,255,.025); color: var(--text); }
+    .hero-note { margin-top: 24px; color: #9188a8; font-size: .85rem; }
+    .profile-wrap { position: relative; justify-self: center; width: min(100%, 320px); }
+    .profile-glow { position: absolute; inset: 12% -6%; background: rgba(139, 92, 246, .28); filter: blur(45px); border-radius: 50%; }
+    .profile-card { position: relative; aspect-ratio: .83; border: 1px solid rgba(196, 181, 253, .32); border-radius: 30px; background: linear-gradient(145deg, #211735, #110e1b 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,.28); }
+    .profile-card::before { content: ""; position: absolute; width: 240px; height: 240px; border: 1px solid rgba(196,181,253,.16); border-radius: 50%; top: -88px; right: -95px; }
+    .profile-card::after { content: ""; position: absolute; width: 190px; height: 190px; border: 1px solid rgba(196,181,253,.12); border-radius: 50%; bottom: -100px; left: -65px; }
+    .avatar { width: 142px; height: 142px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 2.5rem; font-weight: 900; letter-spacing: -.08em; background: linear-gradient(135deg, #a78bfa, #5b21b6); border: 5px solid rgba(255,255,255,.12); box-shadow: 0 0 0 12px rgba(167,139,250,.07); overflow: hidden; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .profile-name { font-size: 1.2rem; font-weight: 850; margin-top: 23px; text-align: center; }
+    .profile-role { color: var(--muted); font-size: .85rem; text-align: center; padding: 0 20px; }
+    .photo-label { position: relative; z-index: 2; margin-top: 17px; font-size: .78rem; color: var(--purple-light); cursor: pointer; border: 1px solid var(--line); padding: 7px 11px; border-radius: 999px; }
+    #photoInput { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .section { padding: 72px 0; }
+    .section-head { margin-bottom: 28px; }
+    .kicker { color: var(--purple); text-transform: uppercase; letter-spacing: .16em; font-weight: 850; font-size: .76rem; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.045em; line-height: 1.15; margin: 8px 0 12px; }
+    .section-intro { max-width: 680px; color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .panel { background: linear-gradient(145deg, rgba(27,23,41,.95), rgba(19,16,29,.95)); border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; }
+    .panel p { margin: 0; color: var(--muted); }
+    .fact-list { display: grid; gap: 15px; }
+    .fact { display: flex; gap: 13px; align-items: flex-start; }
+    .fact-icon { flex: 0 0 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: rgba(139,92,246,.15); color: var(--purple-light); font-size: 1.1rem; }
+    .fact strong { display: block; font-size: .95rem; }
+    .fact small { color: var(--muted); display: block; font-size: .84rem; margin-top: 2px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .skill { padding: 18px 14px; text-align: center; border: 1px solid var(--line); border-radius: 15px; background: rgba(27,23,41,.7); font-size: .9rem; font-weight: 750; }
+    .skill span { display: block; font-size: 1.35rem; margin-bottom: 7px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .project { padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); transition: transform .2s, border-color .2s; }
+    .project:hover { transform: translateY(-3px); border-color: rgba(167,139,250,.5); }
+    .project-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .project-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: rgba(139,92,246,.15); color: var(--purple-light); font-size: 1.35rem; }
+    .tag { color: var(--purple-light); font-size: .72rem; font-weight: 800; background: rgba(139,92,246,.13); padding: 5px 9px; border-radius: 999px; }
+    .project h3 { margin: 0 0 8px; font-size: 1.12rem; }
+    .project p { color: var(--muted); font-size: .91rem; margin: 0; }
+    .experience { border-left: 1px solid rgba(167,139,250,.4); padding-left: 24px; margin-left: 7px; display: grid; gap: 22px; }
+    .experience-item { position: relative; }
+    .experience-item::before { content: ""; position: absolute; width: 11px; height: 11px; border-radius: 50%; background: var(--purple); left: -30px; top: 7px; box-shadow: 0 0 0 5px rgba(167,139,250,.12); }
+    .experience-item h3 { margin: 0; font-size: 1.05rem; }
+    .experience-item p { color: var(--muted); margin: 5px 0 0; font-size: .92rem; }
+    .contact-card { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 32px; border-radius: 26px; border: 1px solid rgba(167,139,250,.3); background: radial-gradient(ellipse at 90% 0%, rgba(124,58,237,.18), transparent 50%), var(--surface); }
+    .contact-card p { color: var(--muted); margin: 0; }
+    .email-link { overflow-wrap: anywhere; }
+    footer { padding: 28px 0 38px; border-top: 1px solid var(--line); color: #9188a8; font-size: .83rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .back-top { color: var(--purple-light); }
+    @media (max-width: 800px) {
+      .hero { padding-top: 62px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+      .profile-wrap { width: min(72%, 285px); }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-card { align-items: flex-start; flex-direction: column; padding: 25px; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .nav { min-height: 66px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links { display: none; position: absolute; left: 14px; right: 14px; top: 66px; padding: 16px; flex-direction: column; align-items: stretch; gap: 0; background: #151120; border: 1px solid var(--line); border-radius: 15px; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 11px 8px; }
+      .hero { padding: 50px 0 48px; }
+      h1 { font-size: clamp(2.5rem, 13vw, 4rem); }
+      .hero p { font-size: 1rem; }
+      .section { padding: 52px 0; }
+      .panel { padding: 20px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home">KAUNG <span>SATT OO</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu ☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Professional Portfolio</div>
+          <h1>Kaung Satt <span>Oo.</span></h1>
+          <p>Telecom Project Engineer <strong>·</strong> Esports Team Manager</p>
+          <p style="margin-top:16px">I bring together project coordination, field execution, documentation, and esports team operations to help projects and teams move forward with clarity and purpose.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore My Work <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Get In Touch</a>
+          </div>
+          <div class="hero-note">Around 5 years of professional experience across telecom projects and esports management.</div>
+        </div>
+        <div class="profile-wrap">
+          <div class="profile-glow"></div>
+          <div class="profile-card">
+            <div class="avatar" id="avatar">
+              <span id="initials">KSO</span>
+              <img id="profileImage" alt="Profile photo of Kaung Satt Oo">
+            </div>
+            <div class="profile-name">Kaung Satt Oo</div>
+            <div class="profile-role">Project Engineering · Team Management</div>
+            <label class="photo-label" for="photoInput">＋ Add profile photo</label>
+            <input id="photoInput" type="file" accept="image/*" aria-label="Choose a profile photo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">A little about me</div>
+          <h2>Engineering focus.<br><span style="color:var(--purple)">Management mindset.</span></h2>
+          <p class="section-intro">A professional overview of my work across telecommunications infrastructure and competitive esports.</p>
+        </div>
+        <div class="about-grid">
+          <div class="panel">
+            <p>My name is Kaung Satt Oo. I have around five years of experience in the telecommunications industry, working in roles such as Project Engineer and Project Manager. My experience includes coordinating project activities, preparing documentation, supporting project design, and contributing to field implementation across multiple regions in Myanmar.</p>
+            <p style="margin-top:14px">Alongside telecom, I have worked as an esports manager, supporting team operations, tournament management, and team development. I value clear communication, organized execution, and continuous improvement.</p>
+          </div>
+          <div class="panel fact-list">
+            <div class="fact"><div class="fact-icon">⌁</div><div><strong>Telecommunications</strong><small>FTTx, underground works, tower projects</small></div></div>
+            <div class="fact"><div class="fact-icon">▦</div><div><strong>Project Coordination</strong><small>Planning, documentation, design coordination</small></div></div>
+            <div class="fact"><div class="fact-icon">♜</div><div><strong>Esports Operations</strong><small>Tournament and team management</small></div></div>
+            <div class="fact"><div class="fact-icon">◎</div><div><strong>Based in Myanmar</strong><small>Open to professional collaboration</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">What I bring</div>
+          <h2>Core Skills</h2>
+          <p class="section-intro">Skills developed through project work, coordination, documentation, and esports operations.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill"><span>◈</span>Management</div>
+          <div class="skill"><span>▤</span>Documentation</div>
+          <div class="skill"><span>⌘</span>Project Design</div>
+          <div class="skill"><span>♧</span>Tournament Management</div>
+          <div class="skill"><span>♟</span>Team Management</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Selected work</div>
+          <h2>Projects & Highlights</h2>
+          <p class="section-intro">Selected telecommunications and esports projects from my professional experience.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project">
+            <div class="project-top"><div class="project-icon">⌁</div><span class="tag">FTTx</span></div>
+            <h3>MPT FTTx Project</h3>
+            <p>Project experience across Yangon, Mandalay, Kachin, and Shan, supporting telecommunications fiber network deployment activities.</p>
+          </article>
+          <article class="project">
+            <div class="project-top"><div class="project-icon">⌂</div><span class="tag">Underground</span></div>
+            <h3>CMI Project (UG)</h3>
+            <p>Experience associated with an underground telecommunications project, including coordination and project documentation.</p>
+          </article>
+          <article class="project">
+            <div class="project-top"><div class="project-icon">⌁</div><span class="tag">Infrastructure</span></div>
+            <h3>ATOM Tower Project</h3>
+            <p>Telecom tower project experience focused on organized project activities and coordination.</p>
+          </article>
+          <article class="project">
+            <div class="project-top"><div class="project-icon">♜</div><span class="tag">Esports</span></div>
+            <h3>PUBG Mobile Tournament</h3>
+            <p>Esports tournament management experience, including team coordination, event operations, and competitive community development.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Professional journey</div>
+          <h2>Experience Overview</h2>
+          <p class="section-intro">A concise overview of the two fields where I have contributed.</p>
+        </div>
+        <div class="panel">
+          <div class="experience">
+            <div class="experience-item">
+              <h3>Telecom Project Engineer / Project Manager</h3>
+              <p>Approximately 5 years of experience in telecommunications projects, with responsibilities across project coordination, documentation, project design, and implementation support.</p>
+            </div>
+            <div class="experience-item">
+              <h3>Esports Team Manager</h3>
+              <p>Managed esports team activities and supported tournament operations, team development, and competitive event coordination.</p>
+            </div>
+          </div>
+          <p style="margin-top:22px;font-size:.82rem;color:#9188a8">Note: Specific employers, dates, and detailed responsibilities can be added when you are ready to provide them.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <div class="kicker">Let's connect</div>
+            <h2>Have a project in mind?</h2>
+            <p>For professional opportunities, project collaboration, or esports-related enquiries, feel free to contact me.</p>
+            <p style="margin-top:13px"><strong class="email-link">kaungsatt273@gmail.com</strong></p>
+          </div>
+          <a class="btn btn-primary" href="mailto:kaungsatt273@gmail.com">Email Me ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Kaung Satt Oo. All rights reserved.</span>
+      <a class="back-top" href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const photoInput = document.getElementById('photoInput');
+    const profileImage = document.getElementById('profileImage');
+    const initials = document.getElementById('initials');
+
+    photoInput.addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('Please choose an image file.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        profileImage.src = reader.result;
+        profileImage.style.display = 'block';
+        initials.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
